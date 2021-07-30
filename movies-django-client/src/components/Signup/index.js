@@ -93,7 +93,7 @@ const Signup = () => {
                     name="re_password" 
                     id="re_password"
                     required
-                    value={formData.password}
+                    value={formData.re_password}
                     onChange={handleChange}
                     onBlur={handlePasswordMatch}
                  />
