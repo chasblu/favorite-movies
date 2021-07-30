@@ -10,6 +10,12 @@ function App() {
   return (
     <div className="App">
       <Nav />
+      <main>
+        <Switch>
+          {/* <Route path='/'     />need to add render */}
+          
+        </Switch>
+      </main>
     </div>
   );
 }
