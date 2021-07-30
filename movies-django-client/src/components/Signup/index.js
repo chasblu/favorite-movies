@@ -12,6 +12,8 @@ const Signup = () => {
     };
     const history = useHistory();
     const [formData, setFormData] = useState(initialFormData);
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const handleChange = (event) => {
         setFormData((prevState) => {
@@ -26,11 +28,38 @@ const Signup = () => {
             setError(false);
         }
     };
-    
+
+    const _handleSignup = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch('http://localhost:8000/users/', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            });
+            console.log(response)
+            if (response.status === 201) {
+                setSuccess(true);
+                setTimeout(() => {
+                    history.push('/login');
+                }, 3000);
+            } else {
+                // get more helpful error data and write logic accordingly
+                const data = await response.json();
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
     return (
         <div>
             <h2>Sign Up</h2>
-            <form onSubmit={}>
+            <form onSubmit={_handleSignup}>
                 <label htmlFor="username">Username:</label>
                 <input 
                     type="username" 
